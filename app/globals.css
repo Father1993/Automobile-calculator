@@ -19,13 +19,12 @@ body {
     margin: 0 auto;
     border: 5px solid #be3429;
     border-radius: 10px;
-    margin-top: 50px;
+    margin-top: 15px;
 }
 
 .logo {
     max-width: 300px;
-    margin-bottom: 50px;
-    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 #taxChina,
@@ -59,7 +58,7 @@ body {
 }
 
 .main > label {
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     color: #7cade3;
     font-size: 1rem;
 }
@@ -135,20 +134,18 @@ body {
 }
 
 .currency-display {
-    background-color: #7cade3;
-    padding: 10px;
+    background-color: black;
     border-radius: 5px;
-    margin-bottom: 20px;
     text-align: center;
 }
 
 .currency-display h3 {
     color: #2a3c50;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .currency-display p {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #2a3c50;
+    color: whitesmoke;
 }

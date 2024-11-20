@@ -19,7 +19,7 @@ const CurrencyRate = () => {
             setLoading(false)
         } catch (err) {
             console.error('Ошибка получения курса:', err)
-            setRate('14.15')
+            setRate('0- ошибка запроса к ATB')
             setIsDefault(true)
             setLoading(false)
         }
@@ -36,14 +36,14 @@ const CurrencyRate = () => {
 
     return (
         <div className="currency-display">
-            <h3>Текущий курс CNY:</h3>
+            <h3 style={{ color: 'white' }}>Текущий курс CNY от ATB:</h3>
             <p>{rate} ₽</p>
             {isDefault && (
                 <small
                     style={{
-                        color: '#2a3c50',
+                        color: 'white',
                         display: 'block',
-                        marginTop: '5px',
+                        marginTop: '2px',
                     }}
                 >
                     * Используется стандартное значение курса
