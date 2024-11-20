@@ -134,9 +134,10 @@ body {
 }
 
 .currency-display {
-    background-color: black;
+    background-color: #2a3c50;
     border-radius: 5px;
     text-align: center;
+    color: whitesmoke;
 }
 
 .currency-display h3 {
