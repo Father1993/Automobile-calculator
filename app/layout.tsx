@@ -6,11 +6,12 @@ export const metadata: Metadata = {
     description: 'Asia Motors Калькулятор, рассчитай свой авто сам',
     manifest: '/site.webmanifest',
     icons: {
-        apple: [{ url: '/apple-touch-icon.png' }],
         icon: [
-            { url: '/favicon-32x32.png', sizes: '32x32' },
-            { url: '/favicon-16x16.png', sizes: '16x16' },
+            { url: '/favicon.ico' },
+            { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+            { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
         ],
+        apple: [{ url: '/apple-touch-icon.png' }],
         other: [
             {
                 rel: 'mask-icon',

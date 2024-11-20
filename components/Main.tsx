@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react'
+import CurrencyRate from './CurrencyRate'
 
 const Main = () => {
     useEffect(() => {
@@ -172,6 +173,7 @@ const Main = () => {
 
     return (
         <>
+            <CurrencyRate />
             <span id="error-message" className="error"></span>
             <input
                 id="exchange"

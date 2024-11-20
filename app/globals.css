@@ -133,3 +133,22 @@ body {
 #newCars {
     margin-left: 10px;
 }
+
+.currency-display {
+    background-color: #7cade3;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.currency-display h3 {
+    color: #2a3c50;
+    margin-bottom: 5px;
+}
+
+.currency-display p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2a3c50;
+}
