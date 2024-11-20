@@ -4,6 +4,7 @@ import * as cheerio from 'cheerio'
 export const handler = async () => {
     try {
         // Добавляем заголовки и прокси
+        console.log('Начинаем запрос к ATB...')
         const response = await axios.get('https://www.atb.su/', {
             headers: {
                 'User-Agent':
@@ -14,15 +15,17 @@ export const handler = async () => {
                 Pragma: 'no-cache',
             },
             timeout: 10000,
-            proxy: {
-                host: 'proxy.crawlera.com',
-                port: 8010,
-                auth: {
-                    username: process.env.PROXY_USERNAME || '',
-                    password: process.env.PROXY_PASSWORD || '',
-                },
-            },
+            // proxy: {
+            //     host: 'proxy.crawlera.com',
+            //     port: 8010,
+            //     auth: {
+            //         username: process.env.PROXY_USERNAME || '',
+            //         password: process.env.PROXY_PASSWORD || '',
+            //     },
+            // },
         })
+
+        console.log('Ответ получен, парсим HTML...')
 
         const $ = cheerio.load(response.data)
         let rate = ''
@@ -31,8 +34,10 @@ export const handler = async () => {
             const currency = $(element)
                 .find('.currency-table__td--tr-name')
                 .text()
+            console.log('Найденная валюта:', currency)
             if (currency.includes('CNY')) {
                 rate = $(element).find('.currency-table__td:last').text().trim()
+                console.log('Найден курс CNY:', rate)
             }
         })
 
@@ -40,7 +45,7 @@ export const handler = async () => {
         if (!rate) {
             return {
                 statusCode: 200,
-                body: JSON.stringify({ rate: '14.15', isDefault: true }),
+                body: JSON.stringify({ rate: '0', isDefault: true }),
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
@@ -56,13 +61,24 @@ export const handler = async () => {
                 'Access-Control-Allow-Origin': '*',
             },
         }
-    } catch (error) {
-        console.error('Ошибка парсинга:', error)
+    } catch (error: unknown) {
+        console.error(
+            'Ошибка парсинга:',
+            error instanceof Error ? error.message : 'Неизвестная ошибка'
+        )
 
-        // Всегда возвращаем успешный ответ с дефолтным значением
+        // Проверяем, является ли ошибка AxiosError
+        if (axios.isAxiosError(error) && error.response) {
+            console.error('Статус ответа:', error.response.status)
+            console.error('Заголовки ответа:', error.response.headers)
+        }
+
         return {
-            statusCode: 200,
-            body: JSON.stringify({ rate: '14.15', isDefault: true }),
+            statusCode: 500,
+            body: JSON.stringify({
+                error: 'Ошибка при получении курса валюты',
+                isDefault: true,
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
