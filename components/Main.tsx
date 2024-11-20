@@ -5,10 +5,10 @@ import CurrencyRate from './CurrencyRate'
 const Main = () => {
     useEffect(() => {
         // Добавляю копейки к курсу на цену в Китае
-        const plusCurs = Number(0.3)
+        const plusCurs = Number(0)
 
         // Добавляю копейки к расходам по Китаю
-        const chinaPlus = Number(0.6)
+        const chinaPlus = Number(0.3)
 
         // Добавляю 2%
         const percent = Number(1.02)
@@ -95,10 +95,10 @@ const Main = () => {
             // Основные расчеты
             // Курс + 0.30 по НЕМУ нужно считать
             const cursPlus = parseFloat(curs.value) + plusCurs
-            console.log('Курс + 0.30 копеек:', cursPlus)
+            console.log('Курс + 0.0 копеек:', cursPlus)
 
             const plusChina = parseFloat(curs.value) + chinaPlus
-            console.log('Курс + 0.60 копеек:', plusChina)
+            console.log('Курс + 0.30 копеек:', plusChina)
 
             // Цена в рублях в Китае
             const priceRus = parseFloat(price.value) * cursPlus
