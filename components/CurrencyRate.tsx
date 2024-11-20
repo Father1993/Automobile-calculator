@@ -5,40 +5,50 @@ import { useState, useEffect } from 'react'
 const CurrencyRate = () => {
     const [rate, setRate] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string>('')
+    const [isDefault, setIsDefault] = useState<boolean>(false)
 
     const fetchRate = async () => {
         try {
             const response = await fetch('/.netlify/functions/getCurrency')
+            if (!response.ok) throw new Error('Ошибка сети')
+
             const data = await response.json()
 
-            if (data.rate) {
-                setRate(data.rate)
-                setLoading(false)
-            }
+            setRate(data.rate)
+            setIsDefault(data.isDefault)
+            setLoading(false)
         } catch (err) {
-            console.log(err)
-            setError('Ошибка при получении курса')
+            console.error('Ошибка получения курса:', err)
+            setRate('14.15')
+            setIsDefault(true)
             setLoading(false)
         }
     }
 
     useEffect(() => {
         fetchRate()
-
-        // Обновление каждые 2 часа
         const interval = setInterval(fetchRate, 2 * 60 * 60 * 1000)
-
         return () => clearInterval(interval)
     }, [])
 
-    if (loading) return <div>Загрузка курса...</div>
-    if (error) return <div>{error}</div>
+    if (loading)
+        return <div className="currency-display">Загрузка курса...</div>
 
     return (
         <div className="currency-display">
             <h3>Текущий курс CNY:</h3>
             <p>{rate} ₽</p>
+            {isDefault && (
+                <small
+                    style={{
+                        color: '#2a3c50',
+                        display: 'block',
+                        marginTop: '5px',
+                    }}
+                >
+                    * Используется стандартное значение курса
+                </small>
+            )}
         </div>
     )
 }
