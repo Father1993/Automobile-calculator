@@ -89,7 +89,8 @@ const Main = () => {
                     ? parseFloat(taxChina.value)
                     : (parseFloat(price.value) / 11.3 + 1450) * newCarCursPlus
 
-                returnMoneyVal = parseFloat(price.value) * 0.08 * newCarCursPlus
+                returnMoneyVal =
+                    parseFloat(price.value) * (0.09 * newCarCursPlus)
             }
 
             // Основные расчеты
@@ -120,6 +121,13 @@ const Main = () => {
 
             const commissionCompany = parseFloat(commission.value)
             console.log('Комиссия компании в рублях: ', commissionCompany)
+
+            // Добавляем логирование
+            console.log('Налог на новый автомобиль (taxChinaVal):', taxChinaVal)
+            console.log(
+                'Сумма возврата налога (returnMoneyVal):',
+                returnMoneyVal
+            )
 
             // Итоговый расчет
             const totalResult =
