@@ -218,7 +218,6 @@ const Main = () => {
                 id="expensesRus"
                 type="number"
                 placeholder="Введите расходы в РФ"
-                defaultValue="95000"
             />
             <span>Комиссия компании</span>
             <input
